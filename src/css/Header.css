@@ -1,4 +1,6 @@
 .header__banner {
-    border: 1px solid black;
-    padding: .75rem;
+    font-size: .75rem;
+    font-weight: 900;
+    background-color: lightgray;
+    padding: .5rem;
 }

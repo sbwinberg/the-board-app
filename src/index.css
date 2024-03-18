@@ -14,19 +14,82 @@ body{
 
 main{
   width: 100%;
+  padding: .5rem;
+  gap: .5rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  padding
+  align-items: start;
 }
 
+/* COLUMNS */
 .column{
   width: 25vw;
   max-width: 300px;
   min-width: fit-content;
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  border-radius: 10px;
+  padding: .75rem;
+  background-color: lightgray;
+}
 
+/* TASK + CONTAINER */
+.task__container{
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  padding: .75rem 0;
+}
+
+.task {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: .75rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.task__title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.task__date{
+  font-size: .75rem;
+}
+
+/* ADD BUTTON */
+.button__add {
+  font-size: .75rem;
+  font-weight: 600;
+  padding: 1em;
+  border-radius: 10px;
+  outline: 0;
+  border: 0;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  cursor:pointer;
+}
+
+.add__icon{
+  font-size: 1rem;
+}
+
+.button__add:hover {
+  background-color: rgb(164, 164, 164);
+}
+
+/* MODAL */
+.modal__form{
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 10px;
+}
+
+.modal__form label{
+  text-align: right;
 }
