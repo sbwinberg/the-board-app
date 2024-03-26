@@ -1,10 +1,12 @@
 import { useState } from "react"
+import { DragDropContext } from "react-beautiful-dnd";
+
 import Task from "./Task"
 import Column from "./Column"
-import TaskModal from "./TaskModal";
+import NewTaskModal from "./NewTaskModal";
 
 export default function Content() {
-    const [todo, setTodo] = useState([]);
+    const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem('todo')) || []);
     const [doing, setDoing] = useState([]);
     const [done, setDone] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -12,15 +14,13 @@ export default function Content() {
 
     return (
         <main>
-            <Column title={'Todo'} button={true} setIsOpen={setIsOpen} isOpen={isOpen}>
-                {todo.map(task => <Task title={task.title} date={task.date} key={task.title} /> )}
-                <TaskModal />
+            <Column title={'Todo'}>
+                {todoList.map(task => <Task title={task.name} date={task.date} key={task.name} /> )}
+                <NewTaskModal todo={todo} setTodo={setTodo}/>
             </Column>
-            <Column title={'Doing'} setTodo={setTodo}>      
-                {doing.map(task => <Task title={task.title} date={task.date} key={task.title} /> )}
+            <Column title={'Doing'}>      
             </Column>
-            <Column title={'Done'} setTodo={setTodo}>
-                {doing.map(task => <Task title={task.title} date={task.date} key={task.title} /> )}
+            <Column title={'Done'}>
             </Column>
         </main>
     )
