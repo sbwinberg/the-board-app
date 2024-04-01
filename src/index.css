@@ -35,6 +35,13 @@ main{
   background-color: lightgray;
 }
 
+.column__title {
+  /* text-transform: capitalize; */
+  font-weight: 700;
+  width: 90%;
+  border-bottom: 1px solid black;
+}
+
 /* TASK + CONTAINER */
 .task__container{
   display: flex;
@@ -46,10 +53,11 @@ main{
 .task {
   background-color: #fff;
   border-radius: 10px;
-  padding: .75rem;
+  padding: .75rem 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  justify-content: center;
+  position: relative;
 }
 
 .task__title {
@@ -57,8 +65,25 @@ main{
   font-weight: 500;
 }
 
+.task__description {
+  font-size: .8rem;
+}
+
 .task__date{
-  font-size: .75rem;
+  font-size: .55rem;
+  color: rgba(0, 0, 0, 0.555);
+}
+
+.task__delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 15px;
+  width: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ADD BUTTON */
@@ -85,11 +110,16 @@ main{
 
 /* MODAL */
 .modal__form{
-  display: grid;
-  grid-template-columns: max-content max-content;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .modal__form label{
-  text-align: right;
+  position: absolute;
+  left: -99999px;
+}
+
+.modal__form textarea{
+  height: 150px;
 }
