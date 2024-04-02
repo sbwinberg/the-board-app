@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { TaskContext } from "../contexts/taskContext";
 
-const Task = ({task, tasks, setTasks}) => {
+const Task = ({task}) => {
   // States och funktioner för modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   // States och funktioner för beskrivning, titel och editing
+  const { tasks, setTasks } = useContext(TaskContext)
   const [description, setDescription] = useState(task.description);
   const [title, setTitle] = useState(task.title);
   const [isEditing, setIsEditing] = useState(false)
