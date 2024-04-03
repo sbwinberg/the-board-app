@@ -48,6 +48,14 @@ main{
   flex-direction: column;
   gap: .75rem;
   padding: .75rem 0;
+  overflow: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.task__container::-webkit-scrollbar {
+  display: none;
 }
 
 .task {
@@ -123,3 +131,8 @@ main{
 .modal__form textarea{
   height: 150px;
 }
+
+/* Modal */
+/* .fade {
+
+} */

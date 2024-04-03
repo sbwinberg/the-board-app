@@ -29,5 +29,4 @@ export const tasks = [
         description: 'Här händer något fränt',
         date: '2020-06-11',
     }
-    
 ]

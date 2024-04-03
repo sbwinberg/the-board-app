@@ -1,80 +1,97 @@
-import { useContext, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { FaPlus } from 'react-icons/fa'
+import { useContext, useEffect, useState } from "react";
 import { TaskContext } from "../contexts/taskContext";
+import { useParams } from 'react-router-dom';
 
+export default function TaskModal({handleClose, show, setShow}) {
+    const { id } = useParams();
+    const [taskData, setTaskData] = useState(null);
 
-const TaskModal = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    useEffect(() => {
+        const task = tasks.find((task) => id == task.id)
+        setTaskData(task)
+        setShow(true)
+    }, [id])
 
-    const {tasks, setTasks} = useContext(TaskContext)
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const id = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
-        const timedate = new Date().toLocaleDateString();
-        const newTask = {
-            id,
-            title,
-            description,
-            status: 'todo',
-            date: timedate
-        }
-        setTasks([...tasks, newTask]);
-        setTitle('');
-        setDescription('');
-        handleClose();
+    // States och funktioner för beskrivning, titel och editing
+    const { tasks, setTasks } = useContext(TaskContext)
+    const [description, setDescription] = useState(null);
+    const [title, setTitle] = useState(null);
+    const [isEditing, setIsEditing] = useState(false)
+    const handleEdit = () => {
+        setIsEditing(prev => !prev)
     }
 
-  return (
-    <>
-        {/* Visas i kolumnen */}
-        <button className="button__add" onClick={handleShow}>
-            <FaPlus />
-            Lägg till en Todo!
-        </button>
+    // Filtrera arrayen med tasks och ta bort task med rätt id
+    // Uppdatera state
+    const handleDelete = (id) => {
+        const remainingTasks = tasks.filter((task) => task.id !== id);
+        setTasks(remainingTasks);
+        handleClose()
+    }
 
-      {/* Visas bara när modalen är öppen */}
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={true}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Lägg till uppgift</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form id="modal__form" className="modal__form">
-            <label htmlFor="modal__name">Namn på uppgift:</label>
-            <input 
-                id="modal__name"
-                type="text" 
-                placeholder="Task name"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            />
-            <label htmlFor="modal__description">Uppgiftsbeskrivning:</label>
-            <textarea 
-                id="modal__description"
-                placeholder="Beskriv uppgiften"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>Stäng</Button>
-            <Button variant="primary" type='submit' form="modal__form" onClick={handleSubmit}>Lägg till</Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  )
+    // Skapa ett objekt med ny titel/beskrivning
+    // Hitta rätt task i statet och byt ut mot nya objektet (i en ny array)
+    // Uppdatera state med nya arrayen
+    // Stäng redigeringen
+    const handleSave = () => {
+        const updatedTask = {...taskData, description, title}
+        const updatedTasks = tasks.map((t) => {
+            return t.id === updatedTask.id ? updatedTask :  t
+        })
+        setTasks(updatedTasks);
+        handleEdit();
+    }
+
+    // {/* Inställningar för att visa/gömma modalen, bara gå att stänga med knappen och esc */}
+    // {/* Conditional redering om redigering är igång eller inte */}
+    return (
+        <>
+        {taskData && (    
+            <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={true}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        <p>{taskData.status}</p>
+                        {isEditing ? (
+                        <input 
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                        />
+                        ) : (
+                        <h2>{taskData.title}</h2>
+                        )}
+                        <p>{taskData.date}</p>
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {isEditing ? (
+                        <input 
+                        type="text" 
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        />
+                    ) : (
+                        <div>{taskData.description}</div> 
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    {isEditing ? (
+                        <Button variant="secondary" onClick={handleSave}>Spara</Button>
+                    ) : (
+                        <Button variant="secondary" onClick={handleEdit}>Redigera</Button>
+                    )}
+                    <Button variant="primary" type='delete' onClick={() => handleDelete(taskData.id)}>Radera uppgiften</Button>
+                </Modal.Footer>
+            </Modal>
+        )}
+        </>
+    )
 }
-
-export default TaskModal
