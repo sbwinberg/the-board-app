@@ -1,7 +1,19 @@
 // import { Link } from "react-router-dom";
 // import TaskModal from "./TaskModal";
 
-const Task = ({task, handleShow}) => {
+import { useContext } from "react";
+import { TaskContext } from "../contexts/taskContext";
+import { useNavigate } from "react-router-dom";
+
+const Task = ({task}) => {
+  const {setShow} = useContext(TaskContext)
+  const navigate = useNavigate();
+
+  const handleShow = (task) => {
+    setShow(true)
+    navigate('/task/' + task.id)
+};
+
   return (
     <>
     {/* Task som visas */}
@@ -17,9 +29,6 @@ const Task = ({task, handleShow}) => {
         <h2 className="task__title">{task.title}</h2>
         <h3 className="task__date">{task.date}</h3>
       </div>
-
-      {/* Modal för varje task */}
-      {/* <TaskModal task={task} handleClose={handleClose} show={show} setShow={setShow}/> */}
     </>
   )
 }

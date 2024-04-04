@@ -5,6 +5,7 @@ export const TaskContext = createContext()
 
 export function TaskProvider({ children }){
     const [tasks, setTasks] = useState(initialTasks) //initialTasks || []
+    const [show, setShow] = useState(false);
 
     // Gör kolumner efter vad det finns för status ('todo', 'in-progress', 'done')
     // Flytta ut kolumner till state för att lätt kunna lägga till kolumner och tasks
@@ -17,7 +18,7 @@ export function TaskProvider({ children }){
     }) 
 
     return(
-        <TaskContext.Provider value={{tasks, setTasks, columns}}>
+        <TaskContext.Provider value={{tasks, setTasks, columns, show, setShow}}>
             {children}
         </TaskContext.Provider>
     )
