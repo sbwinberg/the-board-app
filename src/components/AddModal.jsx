@@ -3,17 +3,30 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FaPlus } from 'react-icons/fa'
 import { TaskContext } from "../contexts/taskContext";
+import '../css/AddModal.css'
 
 
 const AddModal = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const {tasks, setTasks} = useContext(TaskContext)
 
-    const {tasks, setTasks} = useContext(TaskContext)
+    // Lokalt state för att hålla reda på denna modal
+    const [showAddModal, setShowAddModal] = useState(false);
+    const handleClose = () => setShowAddModal(false);
+    const handleShow = () => setShowAddModal(true);
+
+    // States för kontrollerade komponenter i min form
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
+    // SKAPAR EN NY TASK
+    // Förhindrar omladdning av sidan
+    // Ger unikt id genom att ta ID av sista tasken i arrayen och lägger till 1
+    // Eftersom alla tasks lägger till 1 och läggs till i slutet av tasks-arrayen säkerställs det att idn är i storleksordning
+    // Lägger till dagens datum
+    // Skapar ett objekt med id, titel, beskrivning, status(kolumn) och datum
+    // Lägger till det nya objektet i slutet av tasks-arrayen
+    // Nollställer states som håller koll på titel och beskrivning
+    // Stänger modalen
     const handleSubmit = (e) => {
         e.preventDefault();
         const id = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
@@ -35,13 +48,13 @@ const AddModal = () => {
     <>
         {/* Visas i kolumnen */}
         <button className="button__add" onClick={handleShow}>
-            <FaPlus />
+            <FaPlus className="add__icon"/>
             Lägg till en Todo!
         </button>
 
       {/* Visas bara när modalen är öppen */}
       <Modal
-        show={show}
+        show={showAddModal}
         onHide={handleClose}
         backdrop="static"
         keyboard={true}

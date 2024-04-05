@@ -1,0 +1,14 @@
+.modal__form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal__form label{
+    position: absolute;
+    left: -99999px;
+}
+
+.modal__form textarea{
+    height: 150px;
+}

@@ -6,7 +6,7 @@ import TaskModal from "./TaskModal";
 
 
 export default function Content() {
-    const { columns, setShow, show } = useContext(TaskContext);
+    const { columns } = useContext(TaskContext);
     
     // Använder /:key för att se om URLen matchar någon kolumn
     // Om det finns en match renderas bara den kolumnen ut, annars alla
@@ -16,11 +16,11 @@ export default function Content() {
     return (
         <main>
             {chosenColumn.length ? (
-                    chosenColumn.map(column => <Column key={column.title} column={column} />)
+                    chosenColumn.map(column => <Column key={column.id} column={column} />)
                 ) : (                    
-                    columns.map(column => <Column key={column.title} column={column}/>)
+                columns.map(column => (<Column key={column.id} column={column}/>))
             )}
-            <TaskModal setShow={setShow} show={show}/>
+            <TaskModal />
         </main>
     )
 }

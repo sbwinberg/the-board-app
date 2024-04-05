@@ -3,10 +3,11 @@ import { TaskContext } from "../contexts/taskContext";
 import { Link } from "react-router-dom";
 import Task from "./Task";
 import AddModal from "./AddModal"
+import '../css/Column.css'
 
 export default function Column({column}) {
-    const {tasks, setTasks} = useContext(TaskContext)
-    
+    const {tasks, setTasks, setColumns} = useContext(TaskContext)
+
     // UPPDATERA TASK VID DROP
     // Hämta id som skickas med i dataTransfer
     // Hitta rätt task i tasks-staten
@@ -24,6 +25,7 @@ export default function Column({column}) {
                 return t.id === newTask.id ? newTask :  t
             })
             setTasks(updatedTasks);
+            setColumns(prev => prev)
         }
     }
 
@@ -31,17 +33,19 @@ export default function Column({column}) {
         <div>
             <div
                 className="column"
-                key={column.title} 
+                key={column.id} 
                 onDrop={(e) => handleDrop(e, column.title)} 
                 onDragOver={(e) => e.preventDefault()}
             >
-                <Link to={'/' + column.title}>
-                    <h2 className="column__title">{column.title}</h2>
+                <Link to={'/' + column.title} className="column__link">
+                    <div className="title__container">
+                        <h2 className={`column__title ${column.title}`}>{column.title}</h2>
+                    </div>
                 </Link>
                 <div className="task__container">
                     {column.tasks.map(task => (<Task task={task} key={task.id}/>))}
                 </div>
-                {column.title === 'todo' && <AddModal tasks={tasks} setTasks={setTasks} />}
+                {column.id === 1 && <AddModal />}
             </div>
         </div>
     )

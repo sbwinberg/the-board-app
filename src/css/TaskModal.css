@@ -1,0 +1,33 @@
+.modal__header {
+    align-items: start;
+}
+
+.modal__status {
+    color: rgb(88, 88, 88);
+    text-decoration: none;
+    text-transform: capitalize;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    padding: 0 15px;
+    width: fit-content;
+}
+
+.modal__title {
+    font-size: 2rem;
+}
+
+.modal__date {
+    font-size: .75rem;
+    font-style: italic;
+}
+
+.modal__description{
+    width: 400px;
+    height: 200px;
+}
+
+.title__input {
+    width: 400px;
+    margin-bottom: 5px;
+}

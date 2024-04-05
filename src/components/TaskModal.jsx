@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useContext, useEffect, useState } from "react";
 import { TaskContext } from "../contexts/taskContext";
 import { useParams, useNavigate } from 'react-router-dom';
+import '../css/TaskModal.css'
 
 export default function TaskModal() {
     // Hämta in states från context
@@ -77,31 +78,33 @@ export default function TaskModal() {
             backdrop="static"
             keyboard={true}
             >
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='modal__header'>
                     <Modal.Title>
-                        <p>{taskData.status}</p>
+                        <p className={`modal__status ${taskData.status}`}>{taskData.status}</p>
                         {isEditing ? (
                         <input 
                             type="text"
                             value={taskData.title}
                             onChange={(e) => setTaskData({...taskData, title: e.target.value})}
                             required
+                            className='title__input modal__title'
                         />
                         ) : (
-                        <h2>{taskData.title}</h2>
+                        <h2 className='modal__title'>{taskData.title}</h2>
                         )}
-                        <p>{taskData.date}</p>
+                        <p className='modal__date'>{taskData.date}</p>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {isEditing ? (
-                        <input 
+                        <textarea 
+                        className='modal__description'
                         type="text" 
                         value={taskData.description}
                         onChange={(e) => setTaskData({...taskData, description: e.target.value})}
                         />
                     ) : (
-                        <div>{taskData.description}</div> 
+                        <div className='modal__description'>{taskData.description}</div> 
                     )}
                 </Modal.Body>
                 <Modal.Footer>

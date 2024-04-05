@@ -1,4 +1,17 @@
-export const statuses = ['todo', 'in-progress', 'done'];
+export const statuses = [
+    {
+        title: 'todo',
+        id: 1,
+    }, 
+    {
+        title:'in-progress',
+        id: 2,
+    }, 
+    {
+        title: 'done',
+        id: 3
+    }
+];
 
 export const tasks = [
     {
