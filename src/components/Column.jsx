@@ -6,7 +6,7 @@ import AddModal from "./AddModal"
 import '../css/Column.css'
 
 export default function Column({column}) {
-    const {tasks, setTasks, setColumns} = useContext(TaskContext)
+    const {tasks, setTasks} = useContext(TaskContext)
 
     // UPPDATERA TASK VID DROP
     // Hämta id som skickas med i dataTransfer
@@ -25,7 +25,6 @@ export default function Column({column}) {
                 return t.id === newTask.id ? newTask :  t
             })
             setTasks(updatedTasks);
-            setColumns(prev => prev)
         }
     }
 

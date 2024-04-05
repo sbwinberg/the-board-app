@@ -16,7 +16,7 @@ export default function Content() {
     return (
         <main>
             {chosenColumn.length ? (
-                    chosenColumn.map(column => <Column key={column.id} column={column} />)
+                chosenColumn.map(column => <Column key={column.id} column={column} />)
                 ) : (                    
                 columns.map(column => (<Column key={column.id} column={column}/>))
             )}

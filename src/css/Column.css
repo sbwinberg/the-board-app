@@ -30,13 +30,13 @@
 
 /* Colors for pre-set columns */
 .todo {
-    background-color: rgba(251, 214, 255, 0.588);
+    background-color: rgba(252, 221, 255, 0.588);
 }
 .in-progress {
-    background-color: rgba(198, 192, 255, 0.63);
+    background-color: rgba(224, 220, 255, 0.63);
 }
 .done{
-    background-color: rgba(145, 255, 145, 0.644);
+    background-color: rgba(205, 255, 205, 0.644);
 }
 
 .task__container{
@@ -66,7 +66,8 @@
     align-items: center;
     gap: .5rem;
     cursor:pointer;
-    background-color: rgba(146, 176, 186, 0.66);
+    background-color: rgba(199, 241, 255, 0.512);
+    ;
   }
   
   .add__icon{
@@ -74,5 +75,5 @@
   }
   
   .button__add:hover {
-    background-color: rgba(150, 162, 145, 0.585);
+    background-color: rgba(163, 232, 255, 0.244);
   }
