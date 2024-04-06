@@ -1,8 +1,13 @@
 .header__banner {
     display: flex;
     align-items: center;
-    font-size: .75rem;
-    font-weight: 900;
-    background-color: rgba(0, 81, 108, 0.181);
+    padding: .5rem;
+    background-color: rgba(34, 139, 34, 0.588);
     backdrop-filter: blur(5px);
+}
+
+.header__title {
+    font-size: 1.7rem;
+    font-weight: 900;
+    margin-bottom: 0;
 }

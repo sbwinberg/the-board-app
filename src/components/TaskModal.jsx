@@ -113,7 +113,7 @@ export default function TaskModal() {
                     ) : (
                         <Button variant="secondary" onClick={() => setIsEditing(true)}>Redigera</Button>
                     )}
-                    <Button variant="primary" type='delete' onClick={() => handleDelete(taskData.id)}>Radera uppgiften</Button>
+                    <Button variant="primary" type='delete' style={{backgroundColor: '#f08080', border: 'none'}} onClick={() => handleDelete(taskData.id)}>Radera uppgiften</Button>
                 </Modal.Footer>
             </Modal>
         )}

@@ -84,7 +84,7 @@ const AddModal = () => {
         </Modal.Body>
         <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>Stäng</Button>
-            <Button variant="primary" type='submit' form="modal__form" onClick={handleSubmit}>Lägg till</Button>
+            <Button variant="primary" type='submit' form="modal__form" onClick={handleSubmit} style={{backgroundColor: 'rgba(34, 139, 34, 0.588)', border: 'none'}}>Lägg till</Button>
         </Modal.Footer>
       </Modal>
     </>
