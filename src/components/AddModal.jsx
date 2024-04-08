@@ -10,7 +10,7 @@ const AddModal = () => {
   const {tasks, setTasks} = useContext(TaskContext)
 
     // Lokalt state för att hålla reda på denna modal
-    const [showAddModal, setShowAddModal] = useState(false);
+    const [showAddModal, setShowAddModal] = useState(false);704
     const handleClose = () => setShowAddModal(false);
     const handleShow = () => setShowAddModal(true);
 

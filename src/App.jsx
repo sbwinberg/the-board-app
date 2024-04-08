@@ -2,11 +2,13 @@ import Header from './components/Header'
 import Content from './components/Content'
 import { TaskProvider } from './contexts/taskContext'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import PageNotFound from './components/PageNotFound';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Content />,
+    errorElement: <PageNotFound />,
     children: [
       {
         path: '/:key',
